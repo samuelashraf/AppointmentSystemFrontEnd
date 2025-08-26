@@ -1,0 +1,12 @@
+<div>
+  <h2 class="text-center">All Appointments</h2>
+  @if(appointments.length === 0) {
+  <p class="text-center align-items-center">No appointments available.</p>
+  }@else {
+  <div class="container">
+    @for (Appointment of appointments; track $index) {
+    <app-appointment-card [appointment]="Appointment"></app-appointment-card>
+    }
+  </div>
+  }
+</div>

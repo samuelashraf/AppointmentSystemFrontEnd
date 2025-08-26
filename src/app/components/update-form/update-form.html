@@ -1,0 +1,60 @@
+<section class="container">
+  <h2>Update Appointment</h2>
+  <form (ngSubmit)="onSubmit()" [formGroup]="form">
+    <div class="mb-3">
+      <label for="customerName" class="form-label">Customer Name</label>
+      <input
+        type="text"
+        id="customerName"
+        class="form-control"
+        formControlName="customerName"
+      />
+      @if(form.get('customerName')?.invalid &&
+      form.get('customerName')?.touched) {
+      <div class="text-danger">Customer Name is required.</div>
+      }
+    </div>
+
+    <div class="mb-3">
+      <label for="appointmentDate" class="form-label">Appointment Date</label>
+      <input
+        type="date"
+        id="appointmentDate"
+        class="form-control"
+        formControlName="appointmentDate"
+      />
+      @if(form.get('appointmentDate')?.invalid &&
+      form.get('appointmentDate')?.touched) {
+      <div class="text-danger">
+        Appointment Date is required and must be in the future.
+      </div>
+      }
+    </div>
+
+    <div class="mb-3">
+      <label for="status" class="form-label">Status</label>
+      <select id="status" class="form-select" formControlName="status">
+        <option value="" disabled>Select status</option>
+        @for (status of statusOptions; track $index) {
+        <option value="{{status}}">{{status}}</option>
+        }
+      </select>
+      @if(form.get('status')?.invalid && form.get('status')?.touched) {
+      <div class="text-danger">Status is required.</div>
+      }
+    </div>
+
+    <div class="mb-3">
+      <label for="notes" class="form-label">Notes</label>
+      <textarea
+        id="notes"
+        class="form-control"
+        formControlName="notes"
+      ></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="!form.valid">
+      Update Appointment
+    </button>
+  </form>
+</section>
